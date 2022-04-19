@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DocumentValidateur {
 
-    public List<String> validate(DocumentDto documentDto){
+    public static List<String> validate(DocumentDto documentDto){
         List<String> errors = new ArrayList<>();
         if(documentDto == null){
             errors.addAll(
@@ -32,10 +32,8 @@ public class DocumentValidateur {
         if(!StringUtils.hasLength(documentDto.getContenu())){
             errors.add("Le contenu du document ne doit pas être vide !");
         }
-        if(documentDto.getClasseurDto() == null){
-            errors.add("Le classeur à laquelle le document appartient ne doit pas être vide !");
-        }
 
+        errors.addAll(ClasseurValidateur.validate(documentDto.getClasseurDto()));
         return errors;
     }
 }
