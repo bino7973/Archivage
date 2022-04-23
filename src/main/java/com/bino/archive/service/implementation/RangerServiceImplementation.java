@@ -4,6 +4,7 @@ import com.bino.archive.dto.RangerDto;
 import com.bino.archive.exception.EntityNotFoundException;
 import com.bino.archive.exception.ErrorCodes;
 import com.bino.archive.exception.InvalidEntityException;
+import com.bino.archive.model.Ranger;
 import com.bino.archive.repository.RangerRepository;
 import com.bino.archive.service.RangerService;
 import com.bino.archive.validateur.RangerValidateur;
@@ -41,6 +42,8 @@ public class RangerServiceImplementation implements RangerService {
             return null;
         }
         log.info("Extraction d'un ranger à partir de son id ", idRanger);
+        //Ranger ranger = rangerRepository.findById(idRanger).get();
+        //log.info("voici le ranger {}", ranger.getArmoire().getId()+"  "+ranger.getArmoire().getSlug()+"   "+ranger.getArmoire().);
         return rangerRepository.findById(idRanger).map(RangerDto::fromEntity).orElseThrow(
                 ()-> new EntityNotFoundException("Le ranger avec l'id "+idRanger+" n'a pas été trouvé dans la BDD !",ErrorCodes.RANGER_NOT_FOUND)
         );
@@ -74,4 +77,5 @@ public class RangerServiceImplementation implements RangerService {
         rangerRepository.deleteById(idRanger);
         return Boolean.TRUE;
     }
+
 }

@@ -1,7 +1,9 @@
 package com.bino.archive.dto;
 
 
+import com.bino.archive.model.Armoire;
 import com.bino.archive.model.Ranger;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RangerDto {
 
     private Long id;
@@ -32,7 +35,7 @@ public class RangerDto {
                 .id(ranger.getId())
                 .nom(ranger.getNom())
                 .slug(ranger.getSlug())
-                .classeurDtos(ranger.getClasseurs()!= null ? ranger.getClasseurs().stream().map(ClasseurDto::fromEntity).collect(Collectors.toList()) : new ArrayList<>())
+                //.classeurDtos(ranger.getClasseurs().size()>0 ? ranger.getClasseurs().stream().map(ClasseurDto::fromEntity).collect(Collectors.toList()) : new ArrayList<>())
                 .armoireDto(ArmoireDto.fromEntity(ranger.getArmoire()))
                 .build();
     }
@@ -42,7 +45,7 @@ public class RangerDto {
         ranger.setId(rangerDto.getId());
         ranger.setNom(rangerDto.getNom());
         ranger.setSlug(rangerDto.getSlug());
-        ranger.setClasseurs(rangerDto.getClasseurDtos()!= null ? rangerDto.getClasseurDtos().stream().map(ClasseurDto::toEntity).collect(Collectors.toList()) : new ArrayList<>());
+        //ranger.setClasseurs(rangerDto.getClasseurDtos().size()>0 ? rangerDto.getClasseurDtos().stream().map(ClasseurDto::toEntity).collect(Collectors.toList()) : new ArrayList<>());
         ranger.setArmoire(ArmoireDto.toEntity(rangerDto.getArmoireDto()));
         return ranger;
     }

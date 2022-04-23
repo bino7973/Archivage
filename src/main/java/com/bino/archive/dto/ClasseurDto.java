@@ -1,6 +1,8 @@
 package com.bino.archive.dto;
 
 import com.bino.archive.model.Classeur;
+import com.bino.archive.model.Ranger;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +16,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ClasseurDto {
 
     private Long id;
@@ -36,7 +39,7 @@ public class ClasseurDto {
                 .slug(classeur.getSlug())
                 .couleur(classeur.getCouleur())
                 .rangerDto(RangerDto.fromEntity(classeur.getRanger()))
-                .documentDtos(classeur.getDocuments() != null ? classeur.getDocuments().stream().map(DocumentDto::fromEntity).collect(Collectors.toList()): new ArrayList<>())
+                //.documentDtos(classeur.getDocuments().size() >0 ? classeur.getDocuments().stream().map(DocumentDto::fromEntity).collect(Collectors.toList()): new ArrayList<>())
                 .build();
     }
 
@@ -46,8 +49,8 @@ public class ClasseurDto {
         classeur.setNom(classeurDto.getNom());
         classeur.setSlug(classeurDto.getSlug());
         classeur.setCouleur(classeurDto.getCouleur());
-        classeur.setRanger(RangerDto.toEntity(classeurDto.getRangerDto()));
-        classeur.setDocuments(classeurDto.getDocumentDtos()!= null ? classeurDto.getDocumentDtos().stream().map(DocumentDto::toEntity).collect(Collectors.toList()) : new ArrayList<>());
+        classeur.setRanger( RangerDto.toEntity(classeurDto.getRangerDto()));
+        //classeur.setDocuments(classeurDto.getDocumentDtos().size()>0 ? classeurDto.getDocumentDtos().stream().map(DocumentDto::toEntity).collect(Collectors.toList()) : new ArrayList<>());
         return classeur;
     }
 }

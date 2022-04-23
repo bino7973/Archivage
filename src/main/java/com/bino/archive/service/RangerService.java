@@ -1,6 +1,7 @@
 package com.bino.archive.service;
 
 import com.bino.archive.dto.RangerDto;
+import com.bino.archive.model.Ranger;
 
 import java.util.List;
 

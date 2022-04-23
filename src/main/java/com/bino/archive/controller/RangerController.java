@@ -2,6 +2,7 @@ package com.bino.archive.controller;
 
 import com.bino.archive.controller.api.RangerApi;
 import com.bino.archive.dto.RangerDto;
+import com.bino.archive.model.Ranger;
 import com.bino.archive.model.Response;
 import com.bino.archive.service.implementation.RangerServiceImplementation;
 import lombok.AllArgsConstructor;
@@ -85,4 +86,5 @@ public class RangerController implements RangerApi {
                         .build()
         );
     }
+
 }

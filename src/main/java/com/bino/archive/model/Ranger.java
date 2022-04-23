@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
@@ -25,4 +26,9 @@ public class Ranger extends AbstractEntity{
     @ManyToOne
     @JoinColumn(name = "idArmoire")
     private Armoire armoire;
+
+    public Ranger(Long id, String nom, String slug, LocalDateTime dateCreation, LocalDateTime dateModification, Armoire armoire) {
+        super(id, nom, slug, dateCreation, dateModification);
+        this.armoire = armoire;
+    }
 }

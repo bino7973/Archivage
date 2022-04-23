@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public class AbstractEntity implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nom", nullable = false, updatable = true)
@@ -40,4 +40,11 @@ public class AbstractEntity implements Serializable {
     @JsonIgnore
     private LocalDateTime dateModification;
 
+    public AbstractEntity(Long id, String nom, String slug, LocalDateTime dateCreation, LocalDateTime dateModification) {
+        this.id = id;
+        this.nom = nom;
+        this.slug = slug;
+        this.dateCreation = dateCreation;
+        this.dateModification = dateModification;
+    }
 }

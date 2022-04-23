@@ -1,6 +1,7 @@
 package com.bino.archive.dto;
 
 import com.bino.archive.model.Armoire;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ArmoireDto {
 
     private Long id;
@@ -32,7 +34,7 @@ public class ArmoireDto {
                 .nom(armoire.getNom())
                 .slug(armoire.getSlug())
                 .couleur(armoire.getCouleur())
-                .rangerDtos(armoire.getRangers()!=null ? armoire.getRangers().stream().map(RangerDto::fromEntity).collect(Collectors.toList()) : new ArrayList<>())
+                //.rangerDtos(armoire.getRangers().size()>0 ? armoire.getRangers().stream().map(RangerDto::fromEntity).collect(Collectors.toList()) : new ArrayList<>())
                 .build();
     }
 
@@ -42,7 +44,7 @@ public class ArmoireDto {
         armoire.setNom(armoireDto.getNom());
         armoire.setSlug(armoireDto.getSlug());
         armoire.setCouleur(armoireDto.getCouleur());
-        armoire.setRangers(armoireDto.getRangerDtos()!=null ? armoireDto.getRangerDtos().stream().map(RangerDto::toEntity).collect(Collectors.toList()) : new ArrayList<>());
+        //armoire.setRangers(armoireDto.getRangerDtos().size()>0 ? armoireDto.getRangerDtos().stream().map(RangerDto::toEntity).collect(Collectors.toList()) : new ArrayList<>());
         return armoire;
     }
 }
